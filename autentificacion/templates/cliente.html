@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block content %} 
+
+<h1>Cliente</h1>
+
+{% if request.user.is_authenticated %}
+
+    <hr>
+
+    <h4>
+    {{ user.username | upper }}, bienvenido
+    </h4>
+
+{% endif %}
+
+{% endblock %}
