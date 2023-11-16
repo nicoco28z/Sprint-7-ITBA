@@ -36,9 +36,6 @@ class LoginView(View):
             login(request, user)
             print("Usuario autenticado con éxito")
             return redirect('home')
-        else:
-            return redirect('register')
-            print("Inicio de sesión fallido")
         return render(request, 'login.html', {'form': form})
 
 class LogoutView(View):
