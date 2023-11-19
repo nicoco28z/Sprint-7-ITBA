@@ -3,8 +3,6 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
 class CustomUser(AbstractUser):
-    nombre = models.CharField(max_length=30, blank=True)
-    apellido = models.CharField(max_length=30, blank=True)
     dni = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
     telefono = models.CharField(max_length=15, blank=True)
