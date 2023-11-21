@@ -1,0 +1,8 @@
+{% block content %}
+    <h2>Bienvenido a la Página de Inicio</h2>
+    {% if user.is_authenticated %}
+        <p>Hola, {{ user.username }}. <a href="{% url 'logout' %}">Cerrar sesión</a></p>
+    {% else %}
+        <p>Por favor, <a href="{% url 'login' %}">inicia sesión</a> o <a href="{% url 'register' %}">regístrate</a>.</p>
+    {% endif %}
+{% endblock %}

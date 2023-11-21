@@ -1,0 +1,101 @@
+{% block content %}
+<h2>Registrarse</h2>
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    
+    <div>
+        <label for="{{ form.first_name.id_for_label }}" required>Nombre:</label>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+            <p style="color: red;">{{ form.first_name.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.last_name.id_for_label }}" required>Apellido:</label>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+            <p style="color: red;">{{ form.last_name.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.dni.id_for_label }}" required>DNI:</label>
+        {{ form.dni }}
+        {% if form.dni.errors %}
+            <p style="color: red;">{{ form.dni.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.email.id_for_label }}" required>Correo Electrónico:</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <p style="color: red;">{{ form.email.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.telefono.id_for_label }}" required>Telefono:</label>
+        {{ form.telefono }}
+        {% if form.telefono.errors %}
+            <p style="color: red;">{{ form.telefono.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.fecha_nacimiento.id_for_label }}">Fecha Nacimiento:</label>
+        {{ form.fecha_nacimiento }}
+        {% if form.fecha_nacimiento.errors %}
+            <p style="color: red;">{{ form.fecha_nacimiento.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.ocupacion_laboral.id_for_label }}">Ocupacion Laboral:</label>
+        {{ form.ocupacion_laboral }}
+        {% if form.ocupacion_laboral.errors %}
+            <p style="color: red;">{{ form.ocupacion_laboral.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.sueldo_mensual.id_for_label }}">Sueldo Mensual:</label>
+        {{ form.sueldo_mensual }}
+        {% if form.sueldo_mensual.errors %}
+            <p style="color: red;">{{ form.sueldo_mensual.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <br>
+
+    <div>
+        <label for="{{ form.username.id_for_label }}">Nombre de usuario:</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <p style="color: red;">{{ form.username.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <p style="color: red;">{{ form.password1.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.password2.id_for_label }}">Confirmar contraseña:</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <p style="color: red;">{{ form.password2.errors|striptags }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Agregar mas campos (preguntar a Aldo) -->
+
+    <button type="submit">Registrarse</button>
+</form>
+<p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>.</p>
+{% endblock %}
