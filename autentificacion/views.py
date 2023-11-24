@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from autentificacion.forms import CustomUserCreationForm, CustomAuthenticationForm
+from .models import *
 
 class RegisterView(View):
 
@@ -17,7 +18,13 @@ class RegisterView(View):
 
         if form.is_valid():
             user = form.save()
+
             login(request, user)
+            tipoCliente = Tipo_cliente.objects.get_or_create(tipo="Classic", tarjeta_debito=1, retiros_realizados=0, chequera=0)
+            tipoCliente[0].save()
+            cliente = Cliente(id_cliente= user, tipo_cliente=tipoCliente[0])
+            cliente.save()
+
             return redirect('home')
 
         return render(request, 'register.html', {'form': form})

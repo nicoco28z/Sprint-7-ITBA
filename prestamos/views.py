@@ -4,6 +4,7 @@ from .models import Prestamo
 from movimientos.models import Movimiento
 from cuentas.models import Cuenta
 from django.core.exceptions import ValidationError
+from autentificacion.models import *
 
 
 def prestamo(req):
@@ -24,6 +25,7 @@ def prestamo(req):
 
       #Obtener la 1er cuenta del cliente
       cuenta = Cuenta.objects.get(id_cliente = id_cliente)
+
 
       """Esta parte de validaciones se encuentra hardcodeada, pero podría optimizarse cambiando el modelo de datos"""
       if tipo_cliente == "Classic" and monto > 100000 :
