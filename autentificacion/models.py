@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
-from django.db import models
+from prestamos.models import Tipo_cliente
 
 class CustomUser(AbstractUser):
     dni = models.CharField(max_length=20, blank=True)
@@ -17,3 +17,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+class Cliente(models.Model):
+    id_cliente = models.ForeignKey(CustomUser, primary_key=True)
+    tipo_cuenta = models.ForeignKey(Tipo_cliente, to_field='id_cuenta')
