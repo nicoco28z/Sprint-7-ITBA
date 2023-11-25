@@ -5,8 +5,10 @@ from movimientos.models import Movimiento
 from cuentas.models import Cuenta
 from django.core.exceptions import ValidationError
 from autentificacion.models import *
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='/login/')
 def prestamo(req):
   nombre_cliente = req.session['first_name']
   apellido_cliente = req.session['last_name']
