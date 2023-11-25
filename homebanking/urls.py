@@ -25,10 +25,10 @@ from tarjetas.views import *
 from movimientos.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RegisterView.as_view(), name='register'),
+    path('', HomeView.as_view(), name='home'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('home/', HomeView.as_view(), name='home'),
+    path('registrarse/', RegisterView.as_view(), name='register'),
     path('movimientos/', movimientos_usuario, name='movimientos'),
     path('home/prestamo', prestamo, name='prestamo'),
     path('perfil/', perfil, name='perfil'),

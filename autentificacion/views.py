@@ -65,7 +65,7 @@ class LogoutView(View):
 
 class HomeView(View):
 
-    @method_decorator(login_required(login_url='/login/'))
+    
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
