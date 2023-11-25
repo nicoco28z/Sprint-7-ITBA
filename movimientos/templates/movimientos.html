@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimientos</title>
+</head>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, ;
+        padding: 0;
+        background-color: #f7f7f7;
+        color: #555;
+        align-items: center;
+        width: 100%;
+    }
+
+    header {
+        background-color: #35424a;
+        padding: 15px 20px;
+        color: #fff;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav {
+        background-color: #4CAF50;
+        overflow: hidden;
+        position: absolute;
+        justify-content: flex-end;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    nav a {
+        display: block;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        padding: 5%;
+        margin-bottom: 7px;
+        transition: background-color 0.3s;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    table {
+        width: 60%;
+        border-collapse: collapse;
+        margin: 20px auto;
+
+    }
+
+    th,
+    td {
+        border: 1px solid #c4c1c1;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f6e6e6;
+    }
+
+    .ingreso {
+        color: green;
+    }
+
+    .transferencia {
+        color: blue;
+    }
+
+    .compra {
+        color: blueviolet;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+
+<body>
+
+    <h2>Movimientos</h2>
+
+    <table>
+        <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Movimiento</th>
+        </tr>
+        {% for movimiento in movimientos %}
+        <tr>
+            <td>{{ movimiento.fecha }}</td>
+            <td>${{ movimiento.monto }}</td>
+            <td class="{{ movimiento.tipo_movimiento }}">{{ movimiento.get_tipo_movimiento_display }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <footer>
+        <p style="margin: 0;">&copy; 2023 Banco Profesional. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
