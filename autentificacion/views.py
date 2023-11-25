@@ -29,7 +29,7 @@ class RegisterView(View):
             cuenta = Cuenta.objects.get_or_create(id_cliente=cliente, saldo=0, iban="Ivansito")
             cuenta[0].save()
 
-            return redirect('home')
+            return redirect('login')
 
         return render(request, 'register.html', {'form': form})
 
