@@ -20,6 +20,15 @@ Implementamos el registro y autenticación de clientes utilizando el sistema pro
 ### 4. Formulario
 Creamos una aplicación de préstamos con un formulario de solicitud de préstamos preaprobados. El formulario cuenta con protección contra Cross Site Request Forgery (CSRF). Los clientes pueden autenticarse para prellenar automáticamente sus datos. Además, el formulario valida el tipo de cliente y establece límites de monto de préstamo según la categoría (BLACK, GOLD, CLASSIC). Las solicitudes de préstamo se registran en la base de datos y afectan al préstamo y al saldo de la cuenta, proporcionando información sobre la aprobación o rechazo de la solicitud.
 
+## Instrucciones de Uso
+Para poner en marcha la aplicación, se deberán cumplir los siguientes pasos:
+
+1. Abrir una consola de comandos.
+2. Posicionarse en la carpeta 'Sprint-7-ITBA'.
+3. Ejecutar el comando `py manage.py runserver`.
+
+Es importante destacar que previamente debes contar con un entorno virtual con DJANGO instalado.
+
 ## Próximo Sprint
 En el próximo sprint, nos enfocaremos en la construcción de una API utilizando Django REST Framework para mejorar la interacción entre el front-end y el back-end.
 
