@@ -26,8 +26,8 @@ class RegisterView(View):
             tipoCliente = Tipo_cliente.objects.get(tipo="Classic")
             cliente = Cliente(id_cliente= user, tipo_cliente=tipoCliente)
             cliente.save()
-            cuenta = Cuenta.objects.get_or_create(id_cliente=cliente, saldo=0, iban="Ivansito")
-            cuenta[0].save()
+            cuenta = Cuenta.objects.create(id_cliente = cliente, saldo = 0, iban= "45255KKlf#4")
+            cuenta.save()
 
             return redirect('login')
 
