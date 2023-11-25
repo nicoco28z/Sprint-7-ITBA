@@ -20,7 +20,8 @@ class RegisterView(View):
             user = form.save()
 
             login(request, user)
-            tipoCliente = Tipo_cliente.objects.get_or_create(tipo="Classic", tarjeta_debito=1, retiros_realizados=0, chequera=0)
+            
+            tipoCliente = Tipo_cliente.objects.get_or_create(tipo="Black", tarjeta_debito=5, retiros_realizados=0, chequera=2)
             tipoCliente[0].save()
             cliente = Cliente(id_cliente= user, tipo_cliente=tipoCliente[0])
             cliente.save()
