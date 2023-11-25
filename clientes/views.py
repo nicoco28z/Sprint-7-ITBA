@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from cuentas.models import Cuenta
 from autentificacion.models import Cliente, Tipo_cliente
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/login')
 def perfil(req):
     user = req.user
     cliente = Cliente.objects.get(id_cliente_id = user.id)

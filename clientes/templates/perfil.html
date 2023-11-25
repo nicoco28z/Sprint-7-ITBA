@@ -68,6 +68,13 @@
             </div>
         </div>
         <div class="container row mb-3">
+            <label for="profesion" class="form-label text-start">Tipo De Cuenta:</label>
+            <div class="input-group col-md-5">
+                <input type="text" id="profesion" class="form-control" placeholder="Profesion" value="{{tipo_cliente.tipo}}"
+                    aria-describedby="button-addon2" readonly>
+            </div>
+        </div>
+        <div class="container row mb-3">
             <div class="col">
                 <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{% url "password_reset" %}'">Resetear Contraseña</button>
             </div>
