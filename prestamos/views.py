@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import FormPrestamo
 from .models import Prestamo
 from movimientos.models import Movimiento
@@ -24,34 +24,40 @@ def prestamo(req):
 
 
       #Obtener la 1er cuenta del cliente
-      cuenta = Cuenta.objects.get(id_cliente = id_cliente)
-
 
       """Esta parte de validaciones se encuentra hardcodeada, pero podría optimizarse cambiando el modelo de datos"""
       if tipo_cliente == "Classic" and monto > 100000 :
-        raise ValidationError("El monto solicitado supera el máximo permitido para este tipo de cliente.")
+        print("El monto solicitado supera el máximo permitido para este tipo de cliente.")
+        render(req, 'formPrestamo.html', {'form': form})
       
       if tipo_cliente == "Gold" and monto > 300000 :
-        raise ValidationError("El monto solicitado supera el máximo permitido para este tipo de cliente.")
+        print("El monto solicitado supera el máximo permitido para este tipo de cliente.")
+        render(req, 'formPrestamo.html', {'form': form})
       
       if tipo_cliente == "Gold" and monto > 500000 :
-        raise ValidationError("El monto solicitado supera el máximo permitido para este tipo de cliente.")
+        print("El monto solicitado supera el máximo permitido para este tipo de cliente.")
+        render(req, 'formPrestamo.html', {'form': form})
+
+      cuenta = Cuenta.objects.get(id_cliente = id_cliente)
+      cliente = CustomUser.objects.get(id=id_cliente)
 
       nuevoPrestamo = Prestamo(
-        tipo,
-        fecha_inicio,
-        monto,
-        id_cliente,
-        nombre_cliente,
-        apellido_cliente
+        loan_type=tipo,
+        fecha_inicio=fecha_inicio,
+        loan_total=monto,
+        customer_id=cliente,
+        customer_name=nombre_cliente,
+        customer_lastname=apellido_cliente
       )
       nuevoPrestamo.save()
-      momvimiento = Movimiento(cuenta.id_cuenta, monto, "prestamo | " + tipo)
+      momvimiento = Movimiento(nro_cuenta=cuenta, monto=monto, operacion= "prestamo | " + tipo)
       momvimiento.save()
     
 
       cuenta.saldo += monto
       cuenta.save()
+
+      return redirect(to="/home")
 
   else:
     form = FormPrestamo(initial={'nombre_cliente':nombre_cliente, 'apellido_cliente':apellido_cliente})

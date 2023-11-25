@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from autentificacion.forms import CustomUserCreationForm, CustomAuthenticationForm
 from .models import *
+from cuentas.models import Cuenta
 
 class RegisterView(View):
 
@@ -21,10 +22,12 @@ class RegisterView(View):
 
             login(request, user)
             
-            tipoCliente = Tipo_cliente.objects.get_or_create(tipo="Black", tarjeta_debito=5, retiros_realizados=0, chequera=2)
-            tipoCliente[0].save()
-            cliente = Cliente(id_cliente= user, tipo_cliente=tipoCliente[0])
+
+            tipoCliente = Tipo_cliente.objects.get(tipo="Classic")
+            cliente = Cliente(id_cliente= user, tipo_cliente=tipoCliente)
             cliente.save()
+            cuenta = Cuenta.objects.get_or_create(id_cliente=cliente, saldo=0, iban="Ivansito")
+            cuenta[0].save()
 
             return redirect('home')
 
@@ -43,6 +46,14 @@ class LoginView(View):
             user = form.get_user()
             login(request, user)
             print("Usuario autenticado con éxito")
+            id_cliente = user.id
+            cliente = Cliente.objects.get(id_cliente = id_cliente)
+
+            request.session['first_name'] = user.first_name
+            request.session['last_name'] = user.last_name
+            request.session['tipo_cliente'] = cliente.tipo_cliente.tipo
+            request.session['id_cliente'] = id_cliente
+
             return redirect('home')
         return render(request, 'login.html', {'form': form})
 
