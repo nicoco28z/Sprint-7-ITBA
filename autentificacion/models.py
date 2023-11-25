@@ -18,11 +18,11 @@ class CustomUser(AbstractUser):
         return self.username
     
 class Tipo_cliente(models.Model):
-  id_tipo = models.AutoField(primary_key=True)
-  tarjeta_debito = models.PositiveSmallIntegerField()
-  retiros_realizados = models.PositiveSmallIntegerField()
-  chequera = models.PositiveSmallIntegerField()
-  tipo = models.CharField(max_length=100, unique=True)
+    id_tipo = models.AutoField(primary_key=True)
+    tarjeta_debito = models.PositiveSmallIntegerField()
+    retiros_realizados = models.PositiveSmallIntegerField()
+    chequera = models.PositiveSmallIntegerField()
+    tipo = models.CharField(max_length=100, unique=True)
 
 class Cliente(models.Model):
     id_cliente = models.ForeignKey(CustomUser, to_field="id", primary_key=True, on_delete=models.DO_NOTHING)

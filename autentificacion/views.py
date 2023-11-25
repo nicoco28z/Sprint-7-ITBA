@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from autentificacion.forms import CustomUserCreationForm, CustomAuthenticationForm
+from cuentas.models import Cuenta
 from .models import *
 from cuentas.models import Cuenta
 
