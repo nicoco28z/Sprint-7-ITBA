@@ -17,11 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from autentificacion.views import *
+from django.contrib.auth import views as auth_views
+from prestamos.views import *
+from clientes.views import perfil
+from tarjetas.views import *
 
+from movimientos.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RegisterView.as_view(), name='register'),
+    path('', HomeView.as_view(), name='home'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('home/', HomeView.as_view(), name='home')
+    path('registrarse/', RegisterView.as_view(), name='register'),
+    path('movimientos/', movimientos_usuario, name='movimientos'),
+    path('home/prestamo', prestamo, name='prestamo'),
+    path('perfil/', perfil, name='perfil'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('tarjetas/', tarjetas, name='tarjetas'),
 ]
+

@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from autentificacion.forms import CustomUserCreationForm, CustomAuthenticationForm
+from cuentas.models import Cuenta
+from .models import *
+from cuentas.models import Cuenta
 
 class RegisterView(View):
 
@@ -17,8 +20,17 @@ class RegisterView(View):
 
         if form.is_valid():
             user = form.save()
+
             login(request, user)
-            return redirect('home')
+            
+
+            tipoCliente = Tipo_cliente.objects.get(tipo="Classic")
+            cliente = Cliente(id_cliente= user, tipo_cliente=tipoCliente)
+            cliente.save()
+            cuenta = Cuenta.objects.create(id_cliente = cliente, saldo = 0, iban= "45255KKlf#4")
+            cuenta.save()
+
+            return redirect('login')
 
         return render(request, 'register.html', {'form': form})
 
@@ -35,6 +47,14 @@ class LoginView(View):
             user = form.get_user()
             login(request, user)
             print("Usuario autenticado con éxito")
+            id_cliente = user.id
+            cliente = Cliente.objects.get(id_cliente = id_cliente)
+
+            request.session['first_name'] = user.first_name
+            request.session['last_name'] = user.last_name
+            request.session['tipo_cliente'] = cliente.tipo_cliente.tipo
+            request.session['id_cliente'] = id_cliente
+
             return redirect('home')
         return render(request, 'login.html', {'form': form})
 
@@ -45,7 +65,7 @@ class LogoutView(View):
 
 class HomeView(View):
 
-    @method_decorator(login_required(login_url='/login/'))
+    
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
