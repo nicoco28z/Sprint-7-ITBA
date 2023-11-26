@@ -65,9 +65,10 @@ class LogoutView(View):
 
 class HomeView(View):
 
-    
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):
-        return render(request, 'home.html')
+        user = request.user
+        cuenta = Cuenta.objects.get(id_cliente = user.id)
+        return render(request, 'home.html', {"cuenta":cuenta})

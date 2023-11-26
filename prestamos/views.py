@@ -59,8 +59,10 @@ def prestamo(req):
       cuenta.saldo += monto
       cuenta.save()
 
-      return redirect(to="/home")
+      return redirect(to="home")
 
   else:
     form = FormPrestamo(initial={'nombre_cliente':nombre_cliente, 'apellido_cliente':apellido_cliente})
-  return render(req, 'formPrestamo.html', {'form': form})
+  user = req.user
+  cuenta = Cuenta.objects.get(id_cliente = user.id)
+  return render(req, 'formPrestamo.html', {'form': form, 'cuenta' : cuenta,})

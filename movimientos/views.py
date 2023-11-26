@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from .models import Movimiento
-# Create your views here.
+from cuentas.models import *
 
 def movimientos_usuario(request):
     movimientos = Movimiento.objects.all()
-    return render(request, 'movimientos.html', {'movimientos': movimientos})
+    user = request.user
+    cuenta = Cuenta.objects.get(id_cliente = user.id)
+    return render(request, 'movimientos.html', {'movimientos': movimientos, 'cuenta':cuenta})
 

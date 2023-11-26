@@ -106,8 +106,77 @@ footer {
 }
 </style>
 
-<body class="text-center mt-5">
-    <div class="container-md rounded" style="background-color: white; padding: 0.1vw 0.5vw 1vw;">
+<body class="text-center">
+    <header>
+        <h1 style="text-align: center">ITBANK</h1>
+    </header>
+    <nav style="justify-content: space-between;">
+        <div style="display: flex; justify-content: center;">
+          {% if user.is_authenticated %}
+          <a
+            href="{% url 'prestamo' %}"
+            style="
+              max-height: 20px;
+              min-width: 80px;
+              font-size: 15px;
+              padding-top: 5px;
+            "
+            >Solicitar Prestamo</a
+          >
+          <a
+            href="{% url 'movimientos' %}"
+            style="
+              max-height: 20px;
+              min-width: 80px;
+              font-size: 15px;
+              padding-top: 5px;
+            "
+            >Mis movimientos</a
+          >
+          <a
+            href="{% url 'perfil' %}"
+            style="
+              max-height: 20px;
+              min-width: 80px;
+              font-size: 15px;
+              padding-top: 5px;
+            "
+            >Mi Perfil</a
+          >
+          <a
+            href="{% url 'tarjetas' %}"
+            style="
+              max-height: 20px;
+              min-width: 80px;
+              font-size: 15px;
+              padding-top: 5px;
+            "
+            >Mis tarjetas</a
+          >
+          <a href="{% url 'logout' %}" style="
+          max-height: 20px;
+          min-width: 80px;
+          font-size: 15px;
+          padding-top: 5px;
+        ">Cerrar sesión</a>
+          <p
+            style="
+              max-height: 20px;
+              min-width: 80px;
+              font-size: 15px;
+              margin-top: 3px;
+            "
+          >
+            Saldo: $ {{ cuenta.saldo }}
+          </p>
+          {% else %}
+          <a href="{% url 'login' %}">Iniciar Sesión</a>
+          <a href="{% url 'register' %}">Registrarse</a>
+          {% endif %}
+        </div>
+      </nav>
+      
+    <div class="container-md rounded mt-3" style="background-color: white; padding: 0.1vw 0.5vw 1vw;">
         <h2 class="font-monospace mt-4">Perfil</h2>
         <div class="container row mt-5 mb-3">
             <div class="col">
